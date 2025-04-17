@@ -21,8 +21,8 @@ export default function Studyplan({id}) {
     },[])
     // console.log(showstudy)
   return (
-    <div className='studyplandiv'>
-      <h2 className='studyplandivh2'>STUDY PLAN</h2>
+    <div className='bg-white p-4 rounded-lg shadow-md'>
+  <h2 className='text-center text-xl font-bold text-blue-600 mb-8  p-4 rounded-lg shadow-md'>STUDY PLAN</h2>
         {showstudy.length>0 ? showstudy.map((res)=>{
             return <div className='studyplanfull'>
                 <div>
