@@ -62,6 +62,9 @@ export default function ClassroomsList() {
                 }}>
                   Manage Assignments
                 </button>
+                <button className='mt-3'>
+                  View Feedback
+                </button>
               </div>
             </div>
           ))
