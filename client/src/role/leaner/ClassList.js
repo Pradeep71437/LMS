@@ -34,7 +34,7 @@ export default function ClassList({theme,settheme}) {
             }).catch((e)=>{
               console.log(e)
             })
-      },[])
+      },[id])
 
     const renderContent = () => {
         switch(learnernav) {
@@ -45,7 +45,7 @@ export default function ClassList({theme,settheme}) {
             case "courses":
                 return <ClassroomCourses id={id} />;
             case "feedback":
-                return <Feedback id={id} />;
+                return <Feedback classroomId={id} />;
             default:
                 return <Classroomlist id={id} classroom={classroom} />;
         }

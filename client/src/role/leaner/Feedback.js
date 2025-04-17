@@ -24,6 +24,10 @@ export default function Feedback({ classroomId }) {
                 throw new Error("No authentication token found");
             }
 
+            if (!classroomId) {
+                throw new Error("Classroom ID is missing");
+            }
+
             console.log("Submitting feedback with data:", {
                 ...formData,
                 classroom_id: classroomId
@@ -54,7 +58,7 @@ export default function Feedback({ classroomId }) {
             console.error("Error submitting feedback:", error.response || error);
             setSubmitStatus({
                 type: 'error',
-                message: error.response?.data?.message || 'Failed to submit feedback'
+                message: error.response?.data?.message || 'Failed to submit feedback. Please try again.'
             });
         }
     };

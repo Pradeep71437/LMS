@@ -4,6 +4,7 @@ const mongodb = require("./config/db")
 const multer = require("multer")
 const PORT = 4000;
 const Routes = require("./routes/userroutes")
+// const learnerRoutes = require("./routes/learner")
 const userschema = require("./controlles/register")
 const cors = require("cors")
 const path = require("path");
@@ -12,9 +13,7 @@ const path = require("path");
 mongodb()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.use(cors(
-
-))
+app.use(cors())
 
 //just connfirm
 
@@ -28,6 +27,7 @@ app.use(
 
 
 app.use("/", Routes)
+// app.use("/feedback", learnerRoutes)
 
 
 // git remote add origin https://github.com/sathish-entri/Learning-Dashboard.git
