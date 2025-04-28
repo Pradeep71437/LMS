@@ -21,27 +21,57 @@ export default function Createclass() {
     setclassstudenthide,
   } = useContext(DataContext);
 
+  // Get token from localStorage with proper error handling
+  const getAuthToken = () => {
+    try {
+      const userDetails = localStorage.getItem("learning-token");
+      if (!userDetails) {
+        console.error("No authentication token found");
+        navigate("/login"); // Redirect to login if no token
+        return null;
+      }
+      const parsedDetails = JSON.parse(userDetails);
+      return parsedDetails.token || parsedDetails; // Handle both token and full user object cases
+    } catch (error) {
+      console.error("Error parsing authentication token:", error);
+      navigate("/login");
+      return null;
+    }
+  };
+
   // Fetch learner list and courses
   useEffect(() => {
+    const token = getAuthToken();
+    if (!token) return;
+
     // Fetch learners
     const role = { "role": "leaner" }
     axios({
       url: "http://localhost:4000/leanerlist",
       method: "POST",
       data: JSON.stringify(role),
-      headers: { "Content-Type": "application/json" }
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
     }).then((response) => {
       setLearners(response.data);
       setFilteredLearners(response.data);
     }).catch((e) => {
-      console.log(e)
+      console.error("Error fetching learners:", e);
+      if (e.response?.status === 401) {
+        navigate("/login");
+      }
     });
 
     // Fetch courses
     axios({
       url: "http://localhost:4000/allcourses",
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
     }).then((response) => {
       if (Array.isArray(response.data)) {
         console.log("Fetched courses:", response.data);
@@ -52,9 +82,12 @@ export default function Createclass() {
       }
     }).catch((e) => {
       console.error("Error fetching courses:", e);
+      if (e.response?.status === 401) {
+        navigate("/login");
+      }
       setCourses([]);
     });
-  }, []);
+  }, [navigate]);
 
   // Update classroom data when selections change
   useEffect(() => {
@@ -68,9 +101,15 @@ export default function Createclass() {
   // Handle classroom submission
   const handleClassroomSubmit = (e) => {
     e.preventDefault();
+    const token = getAuthToken();
+    if (!token) return;
+
     axios
       .post("http://localhost:4000/educator/classroom", classroom, {
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
       })
       .then((response) => {
         console.log("Classroom created:", response.data);
@@ -78,6 +117,9 @@ export default function Createclass() {
       })
       .catch((error) => {
         console.error("Error creating classroom:", error);
+        if (error.response?.status === 401) {
+          navigate("/login");
+        }
       });
   };
 
