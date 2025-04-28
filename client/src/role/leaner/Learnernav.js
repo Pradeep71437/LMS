@@ -9,6 +9,7 @@ export default function Learnernav({setlearnernav,learnernav}) {
         <button className='course' style={{backgroundColor:learnernav=="studyplan"?"red":null}} onClick={()=>navclickfn("studyplan")} >Studyplan</button>
         <button className='course' style={{backgroundColor:learnernav=="assignment"?"red":null}} onClick={()=>navclickfn("assignment")}>Assignment</button>
         <button className='course' style={{backgroundColor:learnernav=="courses"?"red":null}} onClick={()=>navclickfn("courses")}>Courses</button>
+        <button className='course' style={{backgroundColor:learnernav=="feedback"?"red":null}} onClick={()=>navclickfn("feedback")}>Feedback</button>
         {/* <button className='course' style={{backgroundColor:learnernav=="classworks"?"red":null}} onClick={()=>footerfn("classworks")}>Classworks</button> */}
     </div>
   )

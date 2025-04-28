@@ -20,7 +20,13 @@ export default function ShowCourses() {
   } = useContext(DataContext);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('learning-token'));
+    const tokenData = JSON.parse(localStorage.getItem('learning-token'));
+    
+    if (!tokenData || !tokenData.token) {
+      console.error("No authentication token found");
+      return;
+    }
+
     setcourse([]);
     setidvalue([]);
     setcoornav(true);
@@ -28,8 +34,10 @@ export default function ShowCourses() {
     axios({
       url: 'http://localhost:4000/showcorses',
       method: 'POST',
-      data: { token },
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tokenData.token}`
+      }
     })
       .then((res) => {
         if (Array.isArray(res.data)) {

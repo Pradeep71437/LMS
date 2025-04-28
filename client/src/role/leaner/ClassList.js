@@ -9,6 +9,7 @@ import DataContext from '../../Usecontactapi'
 import Learnernav from './Learnernav'
 import Assignment from './Assignment'
 import ClassroomCourses from './ClassroomCourses'
+import Feedback from './Feedback'
 
 export default function ClassList({theme,settheme}) {
     const params=useParams()
@@ -42,6 +43,8 @@ export default function ClassList({theme,settheme}) {
                 return <Assignment id={id} />;
             case "courses":
                 return <ClassroomCourses id={id} />;
+            case "feedback":
+                return <Feedback classroomId={id} />;
             default:
                 return <Classroomlist id={id} classroom={classroom} />;
         }

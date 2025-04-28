@@ -83,11 +83,11 @@ export default function StudyPlan() {
         <p>Batch: {classroom.batch}</p>
       </div>
 
-      <div className="study-plans-section">
-        <h3>Study Plans</h3>
+      <div className="w-full">
+        <h3 className='text-center'>Study Plan</h3>
         {studyPlans.length > 0 ? (
           studyPlans.map((plan) => (
-            <div key={plan._id} className="study-plan-card">
+            <div key={plan._id} className="">
               <h4>{plan.topic}</h4>
               <p><strong>Subject:</strong> {plan.subject}</p>
               <p><strong>Notes:</strong> {plan.notes}</p>

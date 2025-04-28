@@ -29,6 +29,8 @@ const classworklean = require("../controllerleaner/classworklean")
 const uploadassignment = require("../controllerleaner/uploadassignment")
 const getoneassignment = require("../controllerEducat/getoneassignment")
 const marks = require("../controllerleaner/marks")
+const feedback = require("../controllerleaner/feedback")
+const getfeedback = require("../controllerEducat/getfeedback")
 const path = require("path");
 // Routes.get("/",(req,res)=>{
 //     res.send("hello")
@@ -42,7 +44,7 @@ Routes.post("/home", homeauth, home)
 Routes.get("/Peoplelist", peoplelist)
 Routes.post("/educatorlist", educatorlist)
 Routes.post("/leanerlist", leanerlist)
-Routes.get("/allcourses", allcourses)
+Routes.get("/allcourses", newcorsesAuth, allcourses)
 Routes.post("/coordinator/newcorses", newcorsesAuth, newcorses)
 Routes.post("/showcorses", newcorsesAuth, showcorses)
 Routes.post("/showcourses/update/:id", newcorsesAuth, showcourseupdate)
@@ -67,6 +69,9 @@ Routes.post("/learner/classroom", newcorsesAuth, classroomlean)
 Routes.post("/leaner/classwork", newcorsesAuth, classworklean)
 Routes.post("/educator/classroom/assignment/mark/:id", marks)
 
+// Feedback routes
+Routes.post("/learner/feedback", newcorsesAuth, feedback)
+Routes.get("/educator/classroom/feedback/get/:id", newcorsesAuth, getfeedback)
 
 let Storage = multer.diskStorage({
     destination: (req, res, cb) => {

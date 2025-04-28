@@ -94,7 +94,7 @@ export default function ClassroomCourses({ id }) {
               >
                 Previous
               </button>
-              <span className=' mx-4'style={{ width: "100px" }}>Slide <br></br> {currentSlide + 1} of {selectedCourse.slides.length}</span>
+              <span className=' mx-4'style={{ width: "100px" }}>Slide <br> </br> {currentSlide + 1} of {selectedCourse.slides.length}</span>
               <button 
                 onClick={handleNextSlide} 
                 disabled={currentSlide === selectedCourse.slides.length - 1}
