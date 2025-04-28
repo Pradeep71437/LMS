@@ -83,7 +83,7 @@ export default function Login({ setlogin }) {
             />
             {error.password && <span className="error">{error.password}</span>}
           </div>
-          <button type="submit" disabled={isSubmitting}>
+          <button type="submit" disabled={isSubmitting} className="bg-blue-500">
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
         </form>

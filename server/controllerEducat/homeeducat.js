@@ -3,12 +3,12 @@ const { catchAsync } = require('../cmn');
 
 const homeeducat = catchAsync(async (req, res) => {
    try {
-       const { id, role } = req.user
+   const { id, role } = req.user
        console.log("User role:", role);
        console.log("User ID:", id);
-       
+   
        const userRole = role.toLowerCase();
-       let classes;
+   let classes;
        
        if (userRole === 'coordinator') {
            console.log("Fetching all classrooms for coordinator");
@@ -20,15 +20,15 @@ const homeeducat = catchAsync(async (req, res) => {
                });
        } else if (userRole === 'learner' || userRole === 'leaner') {
            console.log("Fetching classrooms for learner");
-           classes = await classschema.find({ studentlist: id })
+     classes = await classschema.find({ studentlist: id })
                .populate({
                    path: 'courses',
                    model: 'courses'
                });
-       } else {
+   } else {
            console.log("Unauthorized role:", role);
            return res.status(403).json({ message: 'Unauthorized role' });
-       }
+   }
 
        console.log("Found classes:", classes);
        res.status(200).json(classes);

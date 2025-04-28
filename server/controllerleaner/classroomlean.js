@@ -28,7 +28,7 @@ const classroomlean = catchAsync(async (req, res) => {
                     path: 'courses',
                     model: 'courses'
                 });
-        } else {
+    } else {
             console.log("Unauthorized role:", role);
             return res.status(403).json({ message: "Unauthorized access" });
         }

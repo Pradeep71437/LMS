@@ -39,18 +39,18 @@ export default function Leaner({ theme, settheme }) {
           >
             Classroom
           </button>
-          <button
+          {/* <button
             className={`sidebar-button ${activeSection === 'courses' ? 'active' : ''}`}
             onClick={() => setActiveSection('courses')}
           >
             Courses
-          </button>
-          <button
+          </button> */}
+          {/* <button
             className={`sidebar-button ${activeSection === 'classwork' ? 'active' : ''}`}
             onClick={() => setActiveSection('classwork')}
           >
             Classwork
-          </button>
+          </button> */}
           <button
             className="sidebar-button"
             onClick={handleChatBotClick}

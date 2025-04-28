@@ -65,47 +65,80 @@ export default function ClassroomCourses({ id }) {
   };
 
   if (loading) {
-    return <div className="classroom-courses">Loading courses...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading courses...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="classroom-courses">{error}</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center bg-red-100 p-6 rounded-lg shadow-md">
+          <p className="text-red-600">{error}</p>
+        </div>
+      </div>
+    );
   }
 
   if (selectedCourse) {
     return (
-      <div className="course-slides">
-        <button className="back-button" onClick={() => setSelectedCourse(null)}>
+      <div className="max-w-4xl h-screen mx-auto px-4 py-8">
+        <button 
+          className="mb-4 px-4 py-2  bg-blue-500 text-white rounded hover:bg-gray-300 transition-colors"
+          onClick={() => setSelectedCourse(null)}
+        >
           Back to Courses
         </button>
-        <h2>{selectedCourse.title}</h2>
-        {selectedCourse.slides && selectedCourse.slides.length > 0 ? (
-          <div className="slide-viewer">
-            <div className="slide-content">
-              <h3>{selectedCourse.slides[currentSlide].heading}</h3>
-              <div className="slide-text">
-                {selectedCourse.slides[currentSlide].content}
+        
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">{selectedCourse.title}</h2>
+          
+          {selectedCourse.slides && selectedCourse.slides.length > 0 ? (
+            <div className="space-y-6">
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                  {selectedCourse.slides[currentSlide].heading}
+                </h3>
+                <div className="prose max-w-none">
+                  <p className="text-gray-600 whitespace-pre-line">
+                    {selectedCourse.slides[currentSlide].content}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <button 
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors disabled:bg-gray-300"
+                  onClick={handlePrevSlide}
+                  disabled={currentSlide === 0}
+                >
+                  Previous
+                </button>
+                
+                <div className="text-center mx-10">
+                  <p className="text-gray-600">
+                    Slide {currentSlide + 1} / {selectedCourse.slides.length}
+                  </p>
+                </div>
+                
+                <button 
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors disabled:bg-gray-300"
+                  onClick={handleNextSlide}
+                  disabled={currentSlide === selectedCourse.slides.length - 1}
+                >
+                  Next
+                </button>
               </div>
             </div>
-            <div className="slide-controls">
-              <button 
-                onClick={handlePrevSlide} 
-                disabled={currentSlide === 0}
-              >
-                Previous
-              </button>
-              <span className=' mx-4'style={{ width: "100px" }}>Slide <br> </br> {currentSlide + 1} of {selectedCourse.slides.length}</span>
-              <button 
-                onClick={handleNextSlide} 
-                disabled={currentSlide === selectedCourse.slides.length - 1}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        ) : (
-          <p>No slides available for this course</p>
-        )}
+          ) : (
+            <p className="text-gray-600">No slides available for this course</p>
+          )}
+        </div>
       </div>
     );
   }
@@ -122,7 +155,6 @@ export default function ClassroomCourses({ id }) {
                   {course.title || 'Unnamed Course'}
                 </h3>
                 <div className="grid grid-cols-2 gap-6 mb-6">
-                  
                   <div className="space-y-4">
                     {course.subject && (
                       <div className="flex items-center">

@@ -111,10 +111,19 @@ export default function Courses({ theme, settheme }) {
             </h2>
             <div className="prose max-w-none">
               <p className="text-gray-600 mb-4">{selectedCourse.description}</p>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">Course Content</h3>
-                <p className="text-gray-600">{selectedCourse.content}</p>
-              </div>
+              {selectedCourse.slides && selectedCourse.slides.length > 0 && (
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">Course Content</h3>
+                  <div className="space-y-4">
+                    {selectedCourse.slides.map((slide, index) => (
+                      <div key={index} className="border-l-4 border-blue-500 pl-4">
+                        <h4 className="font-medium text-gray-800">{slide.heading}</h4>
+                        <p className="text-gray-600 whitespace-pre-line">{slide.content}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
