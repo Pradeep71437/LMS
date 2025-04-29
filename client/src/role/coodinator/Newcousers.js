@@ -69,11 +69,11 @@ export default function Newcousers({ setnewcourses, theme, settheme }) {
         url: "http://localhost:4000/coordinator/newcorses",
         method: "POST",
         data: JSON.stringify({
-          ...additem,
-          token: tokenData
+          ...additem
         }),
         headers: { 
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${tokenData.token}`
         },
       });
       
