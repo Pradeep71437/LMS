@@ -59,12 +59,11 @@ export default function ShowCourses() {
       ) : (
         <div className="course-container">
           {resvalue.map((res) => (
-            <div
-              key={res._id}
-              className="course-card"
-              onClick={() => showcourselistfn(res)}
-              style={{
-                backgroundImage: `
+            <div key={res._id} onClick={() => showcourselistfn(res)}>
+              <div
+                className="course-card"
+                style={{
+                  backgroundImage: `
                   linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
                   ${
                     res.title.toLowerCase().trim() === "html"
@@ -87,14 +86,16 @@ export default function ShowCourses() {
                       ? `url("https://miro.medium.com/v2/resize:fit:1400/0*y6IcBe5J1AdALzXw.png")`
                       : `url(${tamilimage})`
                   }`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              <div className="course-content">
-                <h2 className="font-bold text-red">{res.title}</h2>
-                <p className="text-white text-shadow">{res.description}</p>
-                <p>{res.language}</p>
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              ></div>
+              <div className="flex flex-col justify-center items-center">
+                <div className="course-content text-center ">
+                  <h2 className="font-bold text-red">{res.title}</h2>
+                  <p className="text-black text-shadow">{res.description}</p>
+                  <p>{res.language}</p>
+                </div>
               </div>
             </div>
           ))}
